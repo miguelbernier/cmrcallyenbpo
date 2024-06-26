@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'index/css/b4.css' %}">
+<script src="{% static 'index/js/b4.js' %}"></script>
+
+
+<div id="AgregarPersonalModal" class="modal" style="overflow: scroll;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title text-dark">Agregar nuevo</h5>
+            </div>
+            <div class="modal-body bg-dark text-white">
+                <form method="POST" action="{% url 'AddCliente' %}" enctype="multipart/form-data">{% csrf_token %}
+                    <!-- Aquí puedes agregar los campos que desees para el formulario de agregar cliente -->
+                    {% for field in form_personal %}
+                    <p>{{field.label}} <br>
+                        {{field|add_class:"form-control text-dark"}}</p>
+                    {% for error in field.errors %}
+                    <p class="alarma">{{error}}</p>
+                    {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                    <p class="alarma">{{error}}</p>
+                    {% endfor %}
+            </div>
+            <div class="modal-footer bg-dark">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="submit" class="btn btn-success">
+                    Agregar
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Otros modales (Editar y Eliminar) -->
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="text-center">Clientes   <i class="fas fa-users"></i></h3>
+        <div class="col-md-3 pb-2">
+            <a href="#AgregarPersonalModal"
+                data-toggle="modal" data-dismiss="modal">
+                <button type="button" class="btn btn-success">
+                    Agregar Cliente
+                    <i class="fas fa-plus-circle"></i>
+                </button>
+            </a>
+        </div>
+        <div class="card card-body" style="overflow:scroll">
+            <table class="table table-hover table-primary" id="myTable">
+                <thead>
+                    <tr>
+                        <!-- Aquí se agregan los encabezados para los campos del modelo Cliente -->
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Sexo</th>
+                        <th>Condado</th>
+                        <th>Estatus</th>
+                        <th>Estado Civil</th>
+                        <th>Taxes</th>
+                        <th>Ocupación</th>
+                        <th>Modo de Declaración</th>
+                        <th>Nombre del Cónyuge</th>
+                        <th>Fecha de Nacimiento del Cónyuge</th>
+                        <th>Estatus del Cónyuge</th>
+                        <th>Ocupación del Cónyuge</th>
+                        <th>Cuánto Declara el Cónyuge</th>
+                        <th>Aplica</th>
+                    </tr>
+                </thead>
+                <tbody class="text-dark">
+                    {% for cliente in clientes %}
+                    <tr>
+                        <!-- Aquí se accede a los campos del modelo Cliente -->
+                        <td>{{ cliente.nombre }}</td>
+                        <td>{{ cliente.correo }}</td>
+                        <td>{{ cliente.fecha_nacimiento }}</td>
+                        <td>{{ cliente.sexo }}</td>
+                        <td>{{ cliente.condado }}</td>
+                        <td>{{ cliente.estatus }}</td>
+                        <td>{{ cliente.estado_civil }}</td>
+                        <td>{{ cliente.taxes }}</td>
+                        <td>{{ cliente.ocupacion }}</td>
+                        <td>{{ cliente.modo_declaracion }}</td>
+                        <td>{{ cliente.nombre_conyuge }}</td>
+                        <td>{{ cliente.fecha_nacimiento_conyuge }}</td>
+                        <td>{{ cliente.estatus_conyuge }}</td>
+                        <td>{{ cliente.ocupacion_conyuge }}</td>
+                        <td>{{ cliente.cuanto_declara_conyuge }}</td>
+                        <td>{{ cliente.aplica }}</td>
+                        <!-- Botones de editar y eliminar -->
+                        <td>
+                            <button onclick="editarPersonal('{{ cliente.id }}')" class="btn btn-dark-outline btn-sm" data-toggle="modal" href="#EditarPersonalModal"><img src="{% static 'index/img/editar.png' %}" alt="Error" width="16"></button>
+                            <button onclick="eliminarPersonal('{{ cliente.id }}')" class="btn btn-dark-outline btn-sm" data-toggle="modal" href="#EliminarPersonalModal"><img src="{% static 'index/img/delete.png' %}" alt="Error" width="16"></button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Error...',
+        text: "{{ message }}",
+    })
+</script>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
