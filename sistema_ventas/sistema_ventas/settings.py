@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-4+$7(ctw91iq0v0@t)(z9dzsq4h7)w*n3)pnz!m7@9*^i_^%cv
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '192.168.1.145', 'localhost', '192.168.1.1', '*'                  # Permitir acceso desde cualquier IP (útil para desarrollo, no para producción)
+    'segurosobamacaer.com', '157.173.210.58'                  # Permitir acceso desde cualquier IP (útil para desarrollo, no para producción)
 ]
   # Permitir acceso desde la dirección IPv6 de tu máquina (opcional)
 
