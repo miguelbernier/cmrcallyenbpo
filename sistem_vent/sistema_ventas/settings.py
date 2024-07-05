@@ -81,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'base1',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'mb240405',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -130,11 +130,11 @@ STATICFILES_DIRS = [
 
 # Directorio donde se recopilarán los archivos estáticos para producción
 # Puede ser diferente al de desarrollo
-STATIC_ROOT = Path('C:/Users/pc/Documents/proyecto.trabajo.py/sistema_ventas/staticfiles')
+STATIC_ROOT = Path = os.path.join(BASE_DIR, 'static/')
 
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = Path = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
