@@ -25,9 +25,8 @@ SECRET_KEY = 'django-insecure-4+$7(ctw91iq0v0@t)(z9dzsq4h7)w*n3)pnz!m7@9*^i_^%cv
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    'segurosobamacaer.com', '157.173.210.58'                  # Permitir acceso desde cualquier IP (útil para desarrollo, no para producción)
-]
+ALLOWED_HOSTS = ['segurosobamacaer.com', '157.173.210.58']
+CSRF_TRUSTED_ORIGINS = ['https://157.173.210.58'] 
   # Permitir acceso desde la dirección IPv6 de tu máquina (opcional)
 
 
@@ -109,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'es-mx'
+LANGUAGE_CODE = 'es-co'
 
 TIME_ZONE = 'America/Bogota'
 
